@@ -32,8 +32,8 @@ WHERE continent is not null
 GROUP BY location, POPULATION
 ORDER BY max_cases_percent DESC;
 
-LOCATION | total_infection | POPULATION | infection_percent
---- | --- | ---| ---
+|LOCATION|total_infection|POPULATION|infection_percent|
+|---|---|---|---|
 
 
 -- Looking for countries with the highest death count per population
