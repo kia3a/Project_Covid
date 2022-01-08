@@ -10,3 +10,10 @@ Data cleaning, analytical thinking, pattern recognizion, attention to detail.
 
 ### **TECHNOLOGIES:**
 Excel, SQL
+
+### **[SQL CODE](https://github.com/kia3a/Project_Covid/blob/master/project1.sql)**
+
+### **DATA SETS:**
+[ORIGINAL DATA SET] (https://github.com/kia3a/Project_Covid/blob/master/10172021_COVID_OWD.csv)
+[COVID CASES DATA SET] (https://github.com/kia3a/Project_Covid/blob/master/10172021_COVID_DEATHS.csv)
+[COVID VACCINATION DATA SET] (https://github.com/kia3a/Project_Covid/blob/master/10172021_COVID_VACCINATION.csv)
