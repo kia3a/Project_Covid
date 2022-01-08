@@ -26,11 +26,14 @@ ORDER BY location,date;
 
 -- Looking for countries with the highest infection rate compared to population
 
-SELECT location, MAX(total_cases) as 'highest_infection', population, MAX((total_cases/population)*100) as max_cases_percent
+SELECT location, MAX(total_cases) as 'total_infection', population, MAX((total_cases/population)*100) as infection_percent
 FROM covid_deaths
 WHERE continent is not null
 GROUP BY location, POPULATION
 ORDER BY max_cases_percent DESC;
+
+LOCATION | total_infection | POPULATION | infection_percent
+--- | --- | ---| ---
 
 -- Looking for countries with the highest death count per population
 
