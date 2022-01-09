@@ -80,5 +80,5 @@ FROM covid_deaths
 where hosp_patients <> 0
  AND icu_patients <> 0
 GROUP BY location
-ORDER BY percent_icu DESC
+ORDER BY percent_icu DESC;
 
