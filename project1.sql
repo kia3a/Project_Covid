@@ -82,3 +82,52 @@ where hosp_patients <> 0
 GROUP BY location
 ORDER BY percent_icu DESC;
 
+-- Compare Covid Vaccination with total population
+
+SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
+FROM covid_deaths as dea
+
+JOIN covid_vaccination as vac
+	ON dea.location = vac.location
+    and dea.date = vac.date
+WHERE dea.CONTINENT <> ''
+ORDER BY dea.continent, dea.location, dea.date;
+
+--  Looking for total Population vs Vaccination
+
+SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations, sum(cast(vac.new_vaccinations as decimal)) over (partition by dea.location, dea.date)
+FROM covid_deaths as dea
+
+JOIN covid_vaccination as vac
+	ON dea.location = vac.location
+    and dea.date = vac.date
+WHERE dea.CONTINENT <> ''
+ORDER BY dea.continent, dea.location, dea.date;
+
+
+--  Looking for total Population vs Vaccination per country
+
+SELECT dea.location, max(dea.population) as POPULATIO, sum(cast(vac.new_vaccinations as decimal)) AS TOTAL_VACCINATED
+FROM covid_deaths as dea
+JOIN covid_vaccination as vac
+	ON dea.location = vac.location
+WHERE dea.CONTINENT <> ''
+GROUP BY dea.location
+ORDER BY dea.location;
+
+--  Looking for total Population vs Vaccination per country
+-- USE CTE
+
+WITH PopvsVac (continent, location, date, population, RollingPeopleVaccinated)
+AS
+(
+SELECT dea.continent, dea.location, dea.date, dea.population, sum(cast(vac.new_vaccinations as decimal)) over (partition by dea.location order by dea.location, dea.date) as RollingPeopleVaccinated
+FROM covid_deaths as dea
+JOIN covid_vaccination as vac
+	ON dea.location = vac.location
+WHERE dea.CONTINENT <> ''
+)
+
+SELECT continent, (RollingPeopleVaccinated/population)*100
+FROM PopvsVac
+
